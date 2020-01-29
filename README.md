@@ -3,7 +3,14 @@ KIE Server with all capabilities
 
 NOTE: Tests are currently broken.  Skip Them!
 
+Build the Offliner Plugin
+------------------------------
 
+1. Goto: https://github.com/ippul/offliner-maven-plugin and 
+```
+mvn clean install
+``` 
+2. This plugin is now available for compilation
 
 How to build
 ------------------------------
@@ -27,20 +34,14 @@ NOTE:
 
 - The kie-spring-service-multi-kjar defines 3 steps to package the KJars as a single UBer JAR: 
 
-1. The Maven Dependency Plugin is used to retrieve the required artifacts from the Remote local repository as defined in the settings.xml on the building machine: https://github.com/kie-springboot/kie-spring-service-multi-kjar/blob/master/pom.xml#L266
+1. The custom Maven Offliner Plugin is used to retrieve the required artifacts from the Remote local repository as defined in the settings.xml on the building machine: https://github.com/kie-springboot/kie-spring-service-multi-kjar/blob/offliner/pom.xml#L265
 
-2. The Maven Install Plugin is then used to create a 'local maven repo' which can be packaged in with the Spring Boot Uber Jar: https://github.com/kie-springboot/kie-spring-service-multi-kjar/blob/master/pom.xml#L310
-- The Maven install plugin is created in the src/main/resources folder, which is packaged into the UBer Jar without any additional config. 
-
-3. To prevent any filtering of resources, the resources plugin is configured to ignore filtering of JAR files: 
-https://github.com/kie-springboot/kie-spring-service-multi-kjar/blob/master/pom.xml#L251
-
-4. Compile the project
+2. Compile the project
  ```
 mvn clean install -DskipTests
 ``` 
 
-5. Once compiled these Artifacts can be seen in the following locations: 
+3. Once compiled these Artifacts can be seen in the following locations: 
 
 - The target/classes folder as specified by the Maven Install plugin
 ```
@@ -63,7 +64,7 @@ drwxr-xr-x  6 allyjarrett  staff  192 29 Jan 02:50 2.0.0-SNAPSHOT
 -rw-r--r--  1 allyjarrett  staff  321 29 Jan 02:50 maven-metadata-local.xml
 ```
 
-5. We now have an UBER Jar that contains a local maven repository, ready to be extracted into our runtime environment. 
+4. We now have an UBER Jar that contains a local maven repository, ready to be extracted into our runtime environment. 
 
 How to run it
 ------------------------------
